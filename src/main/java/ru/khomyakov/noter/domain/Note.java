@@ -13,10 +13,6 @@ public class Note {
     private long id;
 
     private String text;
-
-    @Column(updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate = new Date();
-
-    private Date eventDate;
+    private String createdDate = new Date().toString();
+    private String eventDate;
 }

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.khomyakov.noter.domain.Note;
 import ru.khomyakov.noter.repo.NoteRepo;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 @Controller
 public class NoteController {
@@ -29,10 +27,9 @@ public class NoteController {
     }
 
     @PostMapping
-    public String add(@RequestParam String text, @RequestParam String eventDate,  Model model) throws ParseException {
+    public String addNote(@RequestParam String text, @RequestParam String eventDate,  Model model) {
         Note note = new Note();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        note.setEventDate(format.parse(eventDate));
+        note.setEventDate(eventDate);
         note.setText(text);
 
         noteRepo.save(note);

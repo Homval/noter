@@ -7,16 +7,19 @@
 <body>
 <div>
     <form method="post">
-        <input type="text" name="text" placeholder="Enter message"/>
-        <input type="text" name="eventDate" placeholder="Enter date of event in format: yyyy-mm-dd"/>
+        <label>
+            <input type="text" name="text" placeholder="Enter message"/>
+        </label>
+        <label>
+            <input type="text" name="eventDate" placeholder="Enter date of event in format: yyyy-mm-dd"/>
+        </label>
         <br/>
         <input type="submit" value="Create!"/>
     </form>
 </div>
 <h1>List of notes</h1>
 <div th:each="note : ${notes}">
-    <a th:href="@{notes/{id}(id=@{note.getId()})}"
-       th:text="@{note.getText() + ' Date of creating: ' + note.getCreatedDate + ' Date of call: ' + note.getEventDate()}">note</a>
+    <p th:text="${note.getId() + ' ' + note.getText() + ' Date of creating: ' + note.getCreatedDate + ' Date of call: ' + note.getEventDate()}"></p>
 </div>
 
 </body>
