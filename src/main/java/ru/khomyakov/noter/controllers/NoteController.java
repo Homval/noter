@@ -38,4 +38,15 @@ public class NoteController {
         model.addAttribute("notes", notes);
         return "index";
     }
+
+    @PostMapping("filter")
+    public String filter(@RequestParam String filter, Model model) {
+        Iterable<Note> notes;
+        if (filter != null && !filter.isEmpty())
+            notes = noteRepo.findByEventDate(filter);
+        else
+            notes = noteRepo.findAll();
+        model.addAttribute("notes", notes);
+        return "index";
+    }
 }
