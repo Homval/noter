@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit note</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/{id}(id=${note.getId()})}" th:object="${note}">
+    <label for="text"></label>
+        <input type="text" th:field="*{text}" id="text"/>
+    <label for="event"></label>
+        <input type="text" th:field="*{eventDate}" id="event"/>
+    <p th:text="'Created date: ' + *{createdDate}"></p>
+    <br/>
+    <input type="submit" value="Update!"/>
+
+</form>
+
+</body>
+</html>

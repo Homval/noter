@@ -3,11 +3,10 @@ package ru.khomyakov.noter.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.khomyakov.noter.domain.Note;
 import ru.khomyakov.noter.repo.NoteRepo;
+
 
 
 @Controller
@@ -48,5 +47,21 @@ public class NoteController {
             notes = noteRepo.findAll();
         model.addAttribute("notes", notes);
         return "index";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") long id) {
+        model.addAttribute("note", noteRepo.findById(id).orElse(new Note()));
+        return "edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("note") Note note, @PathVariable("id") long id) {
+        Note oldNote = noteRepo.findById(id).orElse(new Note());
+        oldNote.setText(note.getText());
+        oldNote.setEventDate(note.getEventDate());
+        noteRepo.save(oldNote);
+
+        return "redirect:/";
     }
 }
