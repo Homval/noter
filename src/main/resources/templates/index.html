@@ -29,6 +29,9 @@
 <div th:each="note : ${notes}">
     <p th:text="${note.getId() + '  ' + note.getText()}"></p>
     <p th:text="${'Date of creating: ' + note.getCreatedDate + ' Date of call: ' + note.getEventDate()}"></p>
+    <form th:method="GET" th:action="@{/{id}(id=${note.getId()})}">
+        <input type="submit" value="Edit"/>
+    </form>
     <br/>
 </div>
 

@@ -49,7 +49,7 @@ public class NoteController {
         return "index";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/{id}")
     public String edit(Model model, @PathVariable("id") long id) {
         model.addAttribute("note", noteRepo.findById(id).orElse(new Note()));
         return "edit";
