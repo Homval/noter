@@ -66,4 +66,11 @@ public class NoteController {
         model.addAttribute("notes", notes);
         return "index";
     }
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") long id, Model model) {
+        noteRepo.deleteById(id);
+        Iterable<Note> notes = noteRepo.findAll();
+        model.addAttribute("notes", notes);
+        return "index";
+    }
 }
