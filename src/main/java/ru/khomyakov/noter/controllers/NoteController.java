@@ -55,13 +55,15 @@ public class NoteController {
         return "edit";
     }
 
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("note") Note note, @PathVariable("id") long id) {
+    @PostMapping("/{id}")
+    public String update(@ModelAttribute("note") Note note, @PathVariable("id") long id, Model model) {
         Note oldNote = noteRepo.findById(id).orElse(new Note());
         oldNote.setText(note.getText());
         oldNote.setEventDate(note.getEventDate());
         noteRepo.save(oldNote);
 
-        return "redirect:/";
+        Iterable<Note> notes = noteRepo.findAll();
+        model.addAttribute("notes", notes);
+        return "index";
     }
 }

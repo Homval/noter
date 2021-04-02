@@ -13,6 +13,6 @@ public class Note {
     private long id;
 
     private String text;
-    private String createdDate = new Date().toString();
+    private final String createdDate = new Date().toString();
     private String eventDate;
 }
